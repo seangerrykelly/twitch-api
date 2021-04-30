@@ -16,7 +16,7 @@ axios.get("https://api.twitch.tv/helix/games/top", {
         console.log(error);
     })
 
-router.get('/:id', function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.send(games);
 });
 
