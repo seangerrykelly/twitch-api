@@ -1,16 +1,17 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import TopGamesPage from './components/TopGamesPage.js';
-import GamePage from './components/GamePage.js';
+import TopGamesPage from './pages/TopGamesPage.js';
+import GamePage from './pages/GamePage.js';
+import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Navbar/>
         <Switch>
-          <Route exact path="/games">
-            <TopGamesPage></TopGamesPage>
+          <Route exact path="/games" component={TopGamesPage}>
           </Route>
         </Switch>
         <Switch>

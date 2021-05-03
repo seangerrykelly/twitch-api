@@ -41,10 +41,17 @@ export default class TopGamesPage extends React.Component {
         } 
         else {
             return (
-                <div>
+                <div style={{
+                    display: 'flex', 
+                    flexWrap: 'wrap',
+                    justifyContent:'start', 
+                    alignItems: 'center', 
+                    height: '90vh'
+                    }}
+                >
                     {
                         this.state.games.map((game, index) =>
-                            <div class="row">
+                            <div>
                                 <img src={game.box_art_url}/>
                                 <p>{game.name}</p>
                                 <Link to={`/games/${game.id}`}>
