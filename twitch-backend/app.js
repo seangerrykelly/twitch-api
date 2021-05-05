@@ -10,6 +10,7 @@ const API = require('./lib/API');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var topGamesRouter = require('./routes/topGames');
+var streamsRouter = require('./routes/streams');
 
 var app = express();
 
@@ -27,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/topGames', topGamesRouter);
-
+app.use('/streams', streamsRouter);
 
 //Get data on game with specified ID
 app.get('/getGames/:id', (request, response) => {
