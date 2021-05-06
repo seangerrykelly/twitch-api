@@ -6,8 +6,10 @@ const Navbar = () => {
     return (
         <>
             <Nav>
-                <NavLogoLink className="nav-home-link" to="/">
-                    <i className="fab fa-twitch"/>
+                <NavLogoLink  to="/">
+                    <div className="nav-home-link">
+                        <i className="fab fa-twitch"/>
+                    </div>
                 </NavLogoLink>
                 <Bars/>
                 <NavMenu>

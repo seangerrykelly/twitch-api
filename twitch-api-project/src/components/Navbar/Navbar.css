@@ -8,5 +8,12 @@
 .nav-home-link {
     color: #fff;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 4px;
+}
+
+.nav-home-link:hover {
+    transition: all 0.2s ease-in-out;
+    background: #fff;
+    border-radius: 4px;
+    color: #6441A4;
 }

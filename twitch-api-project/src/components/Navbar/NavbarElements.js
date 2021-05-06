@@ -30,15 +30,8 @@ export const NavLogoLink = styled(NLink)`
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
+    padding: 5px 5px 5px 5px;
     cursor: pointer;
-
-    &:hover {
-        transition: all 0.2s ease-in-out;
-        background: #fff;
-        color: 6441A4;
-    }
 `
 
 export const Bars = styled(FaBars)`

@@ -22,15 +22,30 @@ export default class StreamsPage extends React.Component {
             const response = await fetch("http://localhost:9000/streams")
                 .then(res => res.json())
                 .then(res => this.setState({streams: res.data}));
-                this.fixThumbnails();
+                this.cleanStreamDataForDisplay();
         } catch (err) {
             console.log(err);
         }
     }
 
-    fixThumbnails() {
+    cleanStreamDataForDisplay() {
         this.state.streams.forEach( function(stream) {
             stream.thumbnail_url = stream.thumbnail_url.replace('{width}x{height}', '400x225');
+            stream.title = 
+                stream.title.length > 39
+                    ?   stream.title.substring(0,39)
+                    :   stream.title;
+            
+            stream.title = 
+                stream.title.length === 39
+                    ?   stream.title.substring(
+                            0,
+                            Math.min(
+                                stream.title.length,
+                                stream.title.lastIndexOf(" ")
+                            )
+                        ) + "..."
+                    :   stream.title;
         });
         this.forceUpdate();
     }
@@ -59,6 +74,8 @@ export default class StreamsPage extends React.Component {
                                     <Card.Title>{stream.title}</Card.Title>
                                     <Card.Text>
                                         User: {stream.user_name}
+                                    </Card.Text>
+                                    <Card.Text>
                                         Viewers: {stream.viewer_count}
                                     </Card.Text>
                                 </Card.Body>

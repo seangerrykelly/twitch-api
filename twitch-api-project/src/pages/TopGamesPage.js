@@ -21,15 +21,30 @@ export default class TopGamesPage extends React.Component {
             const response = await fetch("http://localhost:9000/topGames")
                 .then(res => res.json())
                 .then(res => this.setState({games: res.data}));
-                this.fixBoxArtUrls();
+                this.cleanGameDataForDisplay();
         } catch (err) {
             console.log(err);
         }
     }
 
-    fixBoxArtUrls() {
+    cleanGameDataForDisplay() {
         this.state.games.forEach( function(game) {
             game.box_art_url = game.box_art_url.replace('{width}x{height}', '225x400');
+            game.name = 
+                game.name.length > 22
+                    ?   game.name.substring(0,22)
+                    :   game.name;
+            
+            game.name = 
+                game.name.length === 22
+                    ?   game.name.substring(
+                            0,
+                            Math.min(
+                                game.name.length,
+                                game.name.lastIndexOf(" ")
+                            )
+                        ) + "..."
+                    :   game.name;
         });
         this.forceUpdate();
     }
@@ -51,7 +66,7 @@ export default class TopGamesPage extends React.Component {
                     }}
                 >
                     {
-                        this.state.games.map((game, index) =>
+                        this.state.games.map((game, index) => 
                             <Card style={{ width: '18rem' }} className="box">
                                 <Card.Img variant="left" src={game.box_art_url} />
                                 <Card.Body>
