@@ -26,7 +26,6 @@ export default class GamePage extends React.Component {
         this.setState({id: id});
 
         try {
-            console.log("http://localhost:9000/getGames/" + id);
             const response = await fetch("http://localhost:9000/getGames/" + id)
                 .then(res => res.json())
                 .then(res => this.setState({game: res[0]}));
@@ -46,7 +45,7 @@ export default class GamePage extends React.Component {
         else {
             return (
                 <div>
-                    <div class="row">
+                    <div>
                         <img src={this.state.game.box_art_url}/>
                         <p>{this.state.game.name}</p>
                     </div>

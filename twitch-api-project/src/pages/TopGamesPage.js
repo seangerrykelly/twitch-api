@@ -1,5 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Card, Button} from 'react-bootstrap'
+import "./Box.css";
 
 export default class TopGamesPage extends React.Component {
 
@@ -44,20 +45,23 @@ export default class TopGamesPage extends React.Component {
                 <div style={{
                     display: 'flex', 
                     flexWrap: 'wrap',
-                    justifyContent:'start', 
+                    justifyContent:'center', 
                     alignItems: 'center', 
                     height: '90vh'
                     }}
                 >
                     {
                         this.state.games.map((game, index) =>
-                            <div>
-                                <img src={game.box_art_url}/>
-                                <p>{game.name}</p>
-                                <Link to={`/games/${game.id}`}>
-                                    See More
-                                </Link>
-                            </div>
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="left" src={game.box_art_url} />
+                                <Card.Body>
+                                    <Card.Title>{game.name}</Card.Title>
+                                    <Card.Text>
+                                        
+                                    </Card.Text>
+                                    <Button variant="primary" href={`/games/${game.id}`}>See More</Button>
+                                </Card.Body>
+                            </Card>
                         )
                     }
                 </div>
@@ -65,3 +69,11 @@ export default class TopGamesPage extends React.Component {
         }
     }
 }
+
+{/* <div>
+<img src={game.box_art_url}/>
+<p>{game.name}</p>
+<Link to={`/games/${game.id}`}>
+    See More
+</Link>
+</div> */}

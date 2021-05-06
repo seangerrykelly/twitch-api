@@ -1,5 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import {Card, Button} from 'react-bootstrap'
+import "./Box.css";
 
 export default class StreamsPage extends React.Component {
 
@@ -44,18 +46,23 @@ export default class StreamsPage extends React.Component {
                 <div style={{
                     display: 'flex', 
                     flexWrap: 'wrap',
-                    justifyContent:'start', 
+                    justifyContent:'center', 
                     alignItems: 'center', 
                     height: '90vh'
                     }}
                 >
                     {
                         this.state.streams.map((stream, index) =>
-                            <div>
-                                <img src={stream.thumbnail_url}/>
-                                <p>{stream.title}</p>
-                                <p>Views: {stream.viewer_count}</p>
-                            </div>
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="left" src={stream.thumbnail_url} />
+                                <Card.Body>
+                                    <Card.Title>{stream.title}</Card.Title>
+                                    <Card.Text>
+                                        User: {stream.user_name}
+                                        Viewers: {stream.viewer_count}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
                         )
                     }
                 </div>

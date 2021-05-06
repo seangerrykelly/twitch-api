@@ -1,0 +1,12 @@
+.navbar-logo {
+    color: #fff;
+    justify-self: start;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.nav-home-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}

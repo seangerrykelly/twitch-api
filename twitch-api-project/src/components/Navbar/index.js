@@ -1,15 +1,14 @@
 import React from 'react';
-import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from './NavbarElements';
-import { Icon, InclineIcon } from '@iconify/react';
-import twitchIcon from '@iconify-icons/mdi/twitch';
+import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink, NavLogoLink } from './NavbarElements';
+import './Navbar.css';
 
 const Navbar = () => {
     return (
         <>
             <Nav>
-                <NavLink to="/Games">
-                    <Icon icon={twitchIcon} color="purple"/>
-                </NavLink>
+                <NavLogoLink className="nav-home-link" to="/">
+                    <i className="fab fa-twitch"/>
+                </NavLogoLink>
                 <Bars/>
                 <NavMenu>
                     <NavLink to="/Games" activeStyle>
