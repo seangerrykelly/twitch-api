@@ -21,7 +21,8 @@ export const NavLink = styled(NLink)`
     cursor: pointer;
 
     &.active{
-        color: #15cdfc;
+        background: #fff;
+        color: #6441A4;
     }
 `
 
@@ -71,8 +72,34 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(NLink)`
     border-radius: 4px;
-    background: #256ce1;
+    background: #6441A4;
     padding: 10px 22px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    padding: 5px 11px;
+    margin-right: 15px;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: #fff;
+        color: #6441A4;
+        padding: 5px 11px;
+    }
+
+    &.active{
+        background: #fff;
+        color: #6441A4;
+    }
+`
+
+export const GitBtnLink = styled(NLink)`
+    border-radius: 4px;
+    background: #256ce1;
+    padding: 5px 11px;
     color: #fff;
     border: none;
     outline: none;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink, NavLogoLink } from './NavbarElements';
+import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink, GitBtnLink, NavLogoLink } from './NavbarElements';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -13,21 +13,15 @@ const Navbar = () => {
                 </NavLogoLink>
                 <Bars/>
                 <NavMenu>
-                    <NavLink to="/Games" activeStyle>
+                    <NavBtnLink to="/Games" activeStyle>
                         Games
-                    </NavLink>
-                    <NavLink to="/Streams" activeStyle>
+                    </NavBtnLink>
+                    <NavBtnLink to="/Streams" activeStyle>
                         Streams
-                    </NavLink>
-                    <NavLink to="/Channels" activeStyle>
-                        Channels
-                    </NavLink>
-                    <NavLink to="/Games" activeStyle>
-                        GitHub
-                    </NavLink>
+                    </NavBtnLink>
                 </NavMenu>
                 <NavBtn>
-                    <NavBtnLink to="/signin">Sign In</NavBtnLink>
+                    <GitBtnLink to="/signin">GitHub</GitBtnLink>
                 </NavBtn>
             </Nav>
         </>
