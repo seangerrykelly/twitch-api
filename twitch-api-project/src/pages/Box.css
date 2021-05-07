@@ -57,3 +57,8 @@
   font-size: 5vh;
   border-radius: 10px 10px 10px 10px;
 }
+
+.watch-btn {
+  color: #fff;
+  background-color: #6441A4;
+}

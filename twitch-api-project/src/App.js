@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TopGamesPage from './pages/TopGamesPage.js';
 import GamePage from './pages/GamePage.js';
+import ChannelPage from './pages/ChannelPage.js';
 import StreamsPage from './pages/StreamsPage';
 import Navbar from './components/Navbar';
 import './App.css';
@@ -17,6 +18,9 @@ function App() {
         </Switch>
         <Switch>
           <Route exact path="/games/:id" component={GamePage}/>
+        </Switch>
+        <Switch>
+          <Route exact path="/channels/:id" component={ChannelPage}/>
         </Switch>
         <Switch>
           <Route exact path="/streams" component={StreamsPage}/>

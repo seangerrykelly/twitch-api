@@ -1,5 +1,6 @@
-import React from 'react'
-import {Card, Button} from 'react-bootstrap'
+import React from 'react';
+import {Card, Button} from 'react-bootstrap';
+import { InfoLink } from './ButtonVariants';
 import "./Box.css";
 
 export default class TopGamesPage extends React.Component {
@@ -74,7 +75,7 @@ export default class TopGamesPage extends React.Component {
                                     <Card.Text>
                                         
                                     </Card.Text>
-                                    <Button variant="primary" href={`/games/${game.id}`}>See More</Button>
+                                    <InfoLink to={`/games/${game.id}`}>See More</InfoLink>
                                 </Card.Body>
                             </Card>
                         )

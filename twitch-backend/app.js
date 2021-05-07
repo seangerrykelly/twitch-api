@@ -45,6 +45,22 @@ app.get('/getGames/:id', (request, response) => {
     .catch((error) => {
         console.log(error);
     })
+});
+
+app.get('/getChannels/:id', (request, response) => {
+  let id = request.params.id
+
+  axios.get("https://api.twitch.tv/helix/channels?broadcaster_id=" + id, {
+        headers: API.headers()
+    })
+    .then((res) => {
+        //response.json(res.data);
+        console.log(res.data.data);
+        response.send(res.data.data);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 })
 
 // catch 404 and forward to error handler

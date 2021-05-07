@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import {Card, Button} from 'react-bootstrap'
+import {Card, Button} from 'react-bootstrap';
+import { InfoLink } from './ButtonVariants';
 import "./Box.css";
 
 export default class StreamsPage extends React.Component {
@@ -9,7 +10,8 @@ export default class StreamsPage extends React.Component {
         super(props);
         this.state = {
             streams: "",
-            backend_response: ""
+            backend_response: "",
+            base_url: "https://twitch.tv/"
         };
     }
 
@@ -78,6 +80,9 @@ export default class StreamsPage extends React.Component {
                                     <Card.Text>
                                         Viewers: {stream.viewer_count}
                                     </Card.Text>
+                                    <InfoLink href={`/channels/${stream.user_id}`} >
+                                        See More
+                                    </InfoLink>
                                 </Card.Body>
                             </Card>
                         )
