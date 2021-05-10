@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Card, Button, Tabs, Tab} from 'react-bootstrap';
+import VideosTab from './VideosTab';
+import ClipsTab from './ClipsTab';
+import "./Box.css";
 
 export default class ChannelPage extends React.Component {
 
@@ -38,15 +42,29 @@ export default class ChannelPage extends React.Component {
     render() {
         if (this.state.channel.length === 0) {
             return (
-                <div>no</div>
+                <div>Channel could not be found</div>
             )
         } 
         else {
             return (
                 <div>
-                    <div>
-                        {this.state.channel.broadcaster_name}
-                    </div>
+                    <Card style={{ width: '18rem' }} className="box">
+                        <Card.Img variant="left" src={this.state.channel.profile_image_url} />
+                        <Card.Body>
+                            <Card.Title>{this.state.channel.display_name}</Card.Title>
+                            <Card.Text>
+                                {this.state.channel.broadcaster_type}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Tabs defaultActiveKey="videos">
+                        <Tab eventKey="videos" title="Videos">
+                            <VideosTab user_id={this.state.id}/>
+                        </Tab>
+                        <Tab eventKey="clips" title="Clips">
+                            <ClipsTab user_id={this.state.id}/>
+                        </Tab>
+                    </Tabs>
                 </div>
             )
         }
