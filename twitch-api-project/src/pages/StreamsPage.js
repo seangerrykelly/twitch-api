@@ -10,6 +10,7 @@ export default class StreamsPage extends React.Component {
         super(props);
         this.state = {
             streams: "",
+            pagination: "",
             backend_response: "",
             base_url: "https://twitch.tv/"
         };
@@ -19,15 +20,38 @@ export default class StreamsPage extends React.Component {
         this.callStreamsAPI();
     }
 
-    callStreamsAPI = async() => {
+    callStreamsAPI = async(cursor) => {
+        var url = "http://localhost:9000/streams";
+        if(cursor) {
+            console.log('cursor');
+            url += "/" + cursor;
+        }
         try {
-            const response = await fetch("http://localhost:9000/streams")
+            if (!cursor) {
+                const response = await fetch(url)
                 .then(res => res.json())
-                .then(res => this.setState({streams: res.data}));
-                this.cleanStreamDataForDisplay();
+                .then(res => this.setState({
+                    streams: res.data,
+                    pagination: res.pagination
+                }));
+            } else {
+                const response = await fetch(url)
+                .then(res => res.json())
+                .then(res => this.setState({
+                    streams: this.state.streams.concat(res.data),
+                    pagination: res.pagination
+                }));
+            }
+            this.cleanStreamDataForDisplay();
+            this.forceUpdate();
         } catch (err) {
             console.log(err);
         }
+    }
+
+    loadMoreStreams() {
+        this.callStreamsAPI(this.state.pagination.cursor);
+        this.forceUpdate();
     }
 
     cleanStreamDataForDisplay() {
@@ -49,7 +73,6 @@ export default class StreamsPage extends React.Component {
                         ) + "..."
                     :   stream.title;
         });
-        this.forceUpdate();
     }
 
     render() {
@@ -60,33 +83,39 @@ export default class StreamsPage extends React.Component {
         } 
         else {
             return (
-                <div style={{
-                    display: 'flex', 
-                    flexWrap: 'wrap',
-                    justifyContent:'center', 
-                    alignItems: 'center', 
-                    height: '90vh'
-                    }}
-                >
-                    {
-                        this.state.streams.map((stream, index) =>
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="left" src={stream.thumbnail_url} />
-                                <Card.Body>
-                                    <Card.Title>{stream.title}</Card.Title>
-                                    <Card.Text>
-                                        User: {stream.user_name}
-                                    </Card.Text>
-                                    <Card.Text>
-                                        Viewers: {stream.viewer_count}
-                                    </Card.Text>
-                                    <InfoLink href={`/channels/${stream.user_id}`} >
-                                        See More
-                                    </InfoLink>
-                                </Card.Body>
-                            </Card>
-                        )
-                    }
+                <div>
+                    <div className="row" 
+                        style={{
+                        display: 'flex', 
+                        flexWrap: 'wrap',
+                        justifyContent:'center', 
+                        alignItems: 'center', 
+                        height: '90vh'
+                        }}
+                    >
+                        {
+                            this.state.streams.map((stream, index) =>
+                                <Card style={{ width: '18rem' }} className="box">
+                                    <Card.Img variant="left" src={stream.thumbnail_url} />
+                                    <Card.Body>
+                                        <Card.Title>{stream.title}</Card.Title>
+                                        <Card.Text>
+                                            User: {stream.user_name}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Viewers: {stream.viewer_count}
+                                        </Card.Text>
+                                        <InfoLink href={`/channels/${stream.user_id}`} >
+                                            See More
+                                        </InfoLink>
+                                    </Card.Body>
+                                </Card>
+                            )
+                        }
+                        <InfoLink variant="primary"
+                                onClick={this.loadMoreStreams.bind(this)}
+                                >Load More</InfoLink>
+                    </div>
                 </div>
             )
         }

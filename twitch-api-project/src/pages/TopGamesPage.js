@@ -75,7 +75,7 @@ export default class TopGamesPage extends React.Component {
                                     <Card.Text>
                                         
                                     </Card.Text>
-                                    <InfoLink to={`/games/${game.id}`}>See More</InfoLink>
+                                    <InfoLink href={`/games/${game.id}`}>See More</InfoLink>
                                 </Card.Body>
                             </Card>
                         )
