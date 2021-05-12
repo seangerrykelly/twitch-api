@@ -1,6 +1,5 @@
-import React from 'react'
-import {Link} from 'react-router-dom';
-import {Card, Button} from 'react-bootstrap';
+import React from 'react';
+import {Card} from 'react-bootstrap';
 import { InfoLink } from './ButtonVariants';
 import "./Box.css";
 
@@ -20,19 +19,19 @@ export default class StreamsPage extends React.Component {
 
     callStreamsAPI = async(cursor) => {
         var url = "http://localhost:9000/streams";
-        if(cursor) {
+        if (cursor) {
             url += "/" + cursor;
         }
         try {
             if (!cursor) {
-                const response = await fetch(url)
+                await fetch(url)
                     .then(res => res.json())
                     .then(res => this.setState({
                         streams: res.data,
                         pagination: res.pagination
                     }));
             } else {
-                const response = await fetch(url)
+                await fetch(url)
                     .then(res => res.json())
                     .then(res => this.setState({
                         streams: this.state.streams.concat(res.data),
@@ -91,7 +90,7 @@ export default class StreamsPage extends React.Component {
                     >
                         {
                             this.state.streams.map((stream, index) =>
-                                <Card style={{ width: '18rem' }} className="box">
+                                <Card key={index} style={{ width: '18rem' }} className="box">
                                     <Card.Img variant="left" src={stream.thumbnail_url} />
                                     <Card.Body>
                                         <Card.Title>{stream.title}</Card.Title>

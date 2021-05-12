@@ -1,5 +1,6 @@
 import React from 'react';
-import {Card, Button, Tabs, Tab} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
+import { InfoLink } from './ButtonVariants';
 import "./Box.css";
 
 export default class ClipsTab extends React.Component {
@@ -8,25 +9,47 @@ export default class ClipsTab extends React.Component {
         super(props);
         this.state = {
             user_id: this.props.user_id,
-            clips: ""
+            clips: "",
+            pagination: ""
         };
     }
 
     componentDidMount() {
-        this.callClipsAPI();
+        this.callClipsAPI(this.state.pagination.cursor);
     }
 
-    callClipsAPI = async() => {
+    callClipsAPI = async(cursor) => {
+        var url = "http://localhost:9000/clips/user/" + this.state.user_id;
+        if (cursor) {
+            url += "/" + cursor;
+        }
 
         try {
-            const response = await fetch("http://localhost:9000/getClips/" + this.state.user_id)
-                .then(res => res.json())
-                .then(res => this.setState({clips: res}));
+
+            if (!cursor) {
+                await fetch(url)
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        clips: res.data,
+                        pagination: res.pagination
+                    }));
+            } else {
+                await fetch(url)
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        clips: this.state.clips.concat(res.data),
+                        pagination: res.pagination
+                    }));
+            }
             this.cleanClipDataForDisplay();
             this.forceUpdate();
         } catch (err) {
             console.log(err);
         }
+    }
+
+    loadMoreClips() {
+        this.callClipsAPI(this.state.pagination.cursor);
     }
 
     cleanClipDataForDisplay() {
@@ -59,17 +82,18 @@ export default class ClipsTab extends React.Component {
         } 
         else {
             return (
-                <div style={{
-                    display: 'flex', 
-                    flexWrap: 'wrap',
-                    justifyContent:'center', 
-                    alignItems: 'center', 
-                    height: '90vh'
-                    }}
+                <div    className="row" 
+                        style={{
+                        display: 'flex', 
+                        flexWrap: 'wrap',
+                        justifyContent:'center', 
+                        alignItems: 'center', 
+                        height: '90vh'
+                        }}
                 >
                     {
                         this.state.clips.map((clip, index) =>
-                            <Card style={{ width: '18rem' }} className="box">
+                            <Card key={index} style={{ width: '18rem' }} className="box">
                                 <Card.Img variant="left" src={clip.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{clip.title}</Card.Title>
@@ -83,6 +107,9 @@ export default class ClipsTab extends React.Component {
                             </Card>
                         )
                     }
+                    <InfoLink variant="primary"
+                                onClick={this.loadMoreClips.bind(this)}
+                                >Load More</InfoLink>
                 </div>
             )
         }

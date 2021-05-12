@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card, Button, Tabs, Tab} from 'react-bootstrap';
+import {Card, Tabs, Tab} from 'react-bootstrap';
 import VideosTab from './VideosTab';
 import ClipsTab from './ClipsTab';
 import "./Box.css";
@@ -8,9 +8,7 @@ import "./Box.css";
 export default class ChannelPage extends React.Component {
 
     static propTypes = {
-        match: PropTypes.object.isRequired,
-        location: PropTypes.object.isRequired,
-        history: PropTypes.object.isRequired
+        match: PropTypes.object.isRequired
     }
 
     constructor (props) {
@@ -25,12 +23,12 @@ export default class ChannelPage extends React.Component {
     }
 
     callChannelAPI = async() => {
-        const { match, location, history } = this.props;
+        const { match } = this.props;
         const { params: {id} } = match;
         this.setState({id: id});
 
         try {
-            const response = await fetch("http://localhost:9000/getChannels/" + id)
+            await fetch("http://localhost:9000/channels/" + id)
                 .then(res => res.json())
                 .then(res => this.setState({channel: res[0]}));
             this.forceUpdate();

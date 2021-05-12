@@ -1,5 +1,6 @@
 import React from 'react';
-import {Card, Button, Tabs, Tab} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
+import { InfoLink } from './ButtonVariants';
 import "./Box.css";
 
 export default class VideosTab extends React.Component {
@@ -8,7 +9,8 @@ export default class VideosTab extends React.Component {
         super(props);
         this.state = {
             user_id: this.props.user_id,
-            videos: ""
+            videos: "",
+            pagination: ""
         };
     }
 
@@ -16,12 +18,28 @@ export default class VideosTab extends React.Component {
         this.callVideosAPI();
     }
 
-    callVideosAPI = async() => {
+    callVideosAPI = async(cursor) => {
 
+        var url = "http://localhost:9000/videos/user/" + this.state.user_id;
+        if (cursor) {
+            url += "/" + cursor;
+        }
         try {
-            const response = await fetch("http://localhost:9000/getVideos/" + this.state.user_id)
-                .then(res => res.json())
-                .then(res => this.setState({videos: res}));
+            if (!cursor) {
+                await fetch(url)
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        videos: res.data,
+                        pagination: res.pagination
+                    }));
+            } else {
+                await fetch(url)
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        videos: this.state.videos.concat(res.data),
+                        pagination: res.pagination
+                    }));
+            }
             this.cleanVideoDataForDisplay();
             this.forceUpdate();
         } catch (err) {
@@ -29,24 +47,35 @@ export default class VideosTab extends React.Component {
         }
     }
 
+    loadMoreVideos() {
+        this.callVideosAPI(this.state.pagination.cursor);
+    }
+
+    shortenText(text, charCount) {
+        text = 
+            text.length > charCount
+                ?   text.substring(0,charCount)
+                :   text;
+    
+        text = 
+            text.length === charCount
+                ?   text.substring(
+                        0,
+                        Math.min(
+                            text.length,
+                            text.lastIndexOf(" ")
+                        )
+                    ) + "..."
+                :   text;
+        return text;
+    }
+
     cleanVideoDataForDisplay() {
+        var instance = this;
         this.state.videos.forEach( function(video) {
             video.thumbnail_url = video.thumbnail_url.replace('%{width}x%{height}', '400x225');
-            video.title = 
-                video.title.length > 39
-                    ?   video.title.substring(0,39)
-                    :   video.title;
-            
-            video.title = 
-                video.title.length === 39
-                    ?   video.title.substring(
-                            0,
-                            Math.min(
-                                video.title.length,
-                                video.title.lastIndexOf(" ")
-                            )
-                        ) + "..."
-                    :   video.title;
+            video.title = instance.shortenText(video.title, 39);
+            video.description = instance.shortenText(video.description, 39);
         });
         this.forceUpdate();
     }
@@ -59,18 +88,19 @@ export default class VideosTab extends React.Component {
         } 
         else {
             return (
-                <div style={{
-                    display: 'flex', 
-                    flexWrap: 'wrap',
-                    justifyContent:'center', 
-                    alignItems: 'center', 
-                    height: '90vh'
-                    }}
+                <div    className="row"
+                        style={{
+                        display: 'flex', 
+                        flexWrap: 'wrap',
+                        justifyContent:'center', 
+                        alignItems: 'center', 
+                        height: '90vh'
+                        }}
                 >
                     {
                         this.state.videos.map((video, index) =>
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="left" src={video.thumbnail_url} />
+                            <Card key={index} style={{ width: '18rem' }} className="box">
+                                <Card.Img alt="Video" variant="left" src={video.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{video.title}</Card.Title>
                                     <Card.Text>
@@ -83,6 +113,9 @@ export default class VideosTab extends React.Component {
                             </Card>
                         )
                     }
+                    <InfoLink variant="primary"
+                                onClick={this.loadMoreVideos.bind(this)}
+                                >Load More</InfoLink>
                 </div>
             )
         }

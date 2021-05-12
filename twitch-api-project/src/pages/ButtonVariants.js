@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { NavLink as NLink} from 'react-router-dom';
-import {Card, Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 export const InfoLink = styled(Button)`
     border-radius: 4px;

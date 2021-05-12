@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 export default class GamePage extends React.Component {
 
     static propTypes = {
-        match: PropTypes.object.isRequired,
-        location: PropTypes.object.isRequired,
-        history: PropTypes.object.isRequired
+        match: PropTypes.object.isRequired
     }
 
     constructor (props) {
@@ -21,12 +19,12 @@ export default class GamePage extends React.Component {
     }
 
     callGameAPI = async() => {
-        const { match, location, history } = this.props;
+        const { match} = this.props;
         const { params: {id} } = match;
         this.setState({id: id});
 
         try {
-            const response = await fetch("http://localhost:9000/getGames/" + id)
+            await fetch("http://localhost:9000/games/" + id)
                 .then(res => res.json())
                 .then(res => this.setState({game: res[0]}));
             this.state.game.box_art_url = this.state.game.box_art_url.replace('{width}x{height}', '225x400');
@@ -46,7 +44,7 @@ export default class GamePage extends React.Component {
             return (
                 <div>
                     <div>
-                        <img src={this.state.game.box_art_url}/>
+                        <img alt="Game" src={this.state.game.box_art_url}/>
                         <p>{this.state.game.name}</p>
                     </div>
                 </div>

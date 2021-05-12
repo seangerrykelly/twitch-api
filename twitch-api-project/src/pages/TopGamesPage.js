@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Button} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 import { InfoLink } from './ButtonVariants';
 import "./Box.css";
 
@@ -27,14 +27,14 @@ export default class TopGamesPage extends React.Component {
         try {
             
             if (!cursor) {
-                const response = await fetch(url)
+                await fetch(url)
                     .then(res => res.json())
                     .then(res => this.setState({
                         games: res.data,
                         pagination: res.pagination
                     }));
             } else {
-                const response = await fetch(url)
+                await fetch(url)
                     .then(res => res.json())
                     .then(res => this.setState({
                         games: this.state.games.concat(res.data),
@@ -94,7 +94,7 @@ export default class TopGamesPage extends React.Component {
                 >
                     {
                         this.state.games.map((game, index) => 
-                            <Card style={{ width: '18rem' }} className="box">
+                            <Card key={index} style={{ width: '18rem' }} className="box">
                                 <Card.Img variant="left" src={game.box_art_url} />
                                 <Card.Body>
                                     <Card.Title>{game.name}</Card.Title>
@@ -114,11 +114,3 @@ export default class TopGamesPage extends React.Component {
         }
     }
 }
-
-{/* <div>
-<img src={game.box_art_url}/>
-<p>{game.name}</p>
-<Link to={`/games/${game.id}`}>
-    See More
-</Link>
-</div> */}

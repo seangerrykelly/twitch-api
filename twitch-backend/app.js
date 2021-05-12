@@ -10,7 +10,11 @@ const API = require('./lib/API');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var topGamesRouter = require('./routes/topGames');
+var gamesRouter = require('./routes/getGame');
 var streamsRouter = require('./routes/streams');
+var videosRouter = require('./routes/getVideos');
+var clipsRouter = require('./routes/getClips');
+var channelsRouter = require('./routes/getChannel');
 
 var app = express();
 
@@ -28,75 +32,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/topGames', topGamesRouter);
+app.use('/games', gamesRouter);
 app.use('/streams', streamsRouter);
+app.use('/videos', videosRouter);
+app.use('/clips', clipsRouter);
+app.use('/channels', channelsRouter);
 
 //Get data on game with specified ID
-app.get('/getGames/:id', (request, response) => {
-  let id = request.params.id
+// app.get('/getGames/:id', (request, response) => {
+//   let id = request.params.id
 
-  axios.get("https://api.twitch.tv/helix/games?id=" + id, {
-        headers: API.headers()
-    })
-    .then((res) => {
-        //response.json(res.data);
-        console.log(res.data.data);
-        response.send(res.data.data);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-});
-
-//Get information on a specific channel
-app.get('/getChannels/:id', (request, response) => {
-  let id = request.params.id
-
-  axios.get("https://api.twitch.tv/helix/users?id=" + id, {
-        headers: API.headers()
-    })
-    .then((res) => {
-        //response.json(res.data);
-        console.log(res.data.data);
-        response.send(res.data.data);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-});
-
-//Get videos of specific user
-app.get('/getVideos/:id', (request, response) => {
-  let id = request.params.id
-
-  axios.get("https://api.twitch.tv/helix/videos?user_id=" + id, {
-        headers: API.headers()
-    })
-    .then((res) => {
-        //response.json(res.data);
-        console.log(res.data.data);
-        response.send(res.data.data);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-});
-
-//Get clips from specific user
-app.get('/getClips/:id', (request, response) => {
-  let id = request.params.id
-
-  axios.get("https://api.twitch.tv/helix/clips?broadcaster_id=" + id, {
-        headers: API.headers()
-    })
-    .then((res) => {
-        //response.json(res.data);
-        console.log(res.data.data);
-        response.send(res.data.data);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-});
+//   axios.get("https://api.twitch.tv/helix/games?id=" + id, {
+//         headers: API.headers()
+//     })
+//     .then((res) => {
+//         //response.json(res.data);
+//         console.log(res.data.data);
+//         response.send(res.data.data);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
