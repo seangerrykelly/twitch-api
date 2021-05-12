@@ -10,9 +10,7 @@ export default class StreamsPage extends React.Component {
         super(props);
         this.state = {
             streams: "",
-            pagination: "",
-            backend_response: "",
-            base_url: "https://twitch.tv/"
+            pagination: ""
         };
     }
 
@@ -23,24 +21,23 @@ export default class StreamsPage extends React.Component {
     callStreamsAPI = async(cursor) => {
         var url = "http://localhost:9000/streams";
         if(cursor) {
-            console.log('cursor');
             url += "/" + cursor;
         }
         try {
             if (!cursor) {
                 const response = await fetch(url)
-                .then(res => res.json())
-                .then(res => this.setState({
-                    streams: res.data,
-                    pagination: res.pagination
-                }));
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        streams: res.data,
+                        pagination: res.pagination
+                    }));
             } else {
                 const response = await fetch(url)
-                .then(res => res.json())
-                .then(res => this.setState({
-                    streams: this.state.streams.concat(res.data),
-                    pagination: res.pagination
-                }));
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        streams: this.state.streams.concat(res.data),
+                        pagination: res.pagination
+                    }));
             }
             this.cleanStreamDataForDisplay();
             this.forceUpdate();
@@ -51,7 +48,6 @@ export default class StreamsPage extends React.Component {
 
     loadMoreStreams() {
         this.callStreamsAPI(this.state.pagination.cursor);
-        this.forceUpdate();
     }
 
     cleanStreamDataForDisplay() {

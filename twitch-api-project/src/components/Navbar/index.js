@@ -21,7 +21,7 @@ const Navbar = () => {
                     </NavBtnLink>
                 </NavMenu>
                 <NavBtn>
-                    <GitBtnLink to="/signin">GitHub</GitBtnLink>
+                    <GitBtnLink href="https://github.com/seangerrykelly/twitch-api">GitHub</GitBtnLink>
                 </NavBtn>
             </Nav>
         </>

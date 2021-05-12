@@ -6,18 +6,27 @@ const axios = require('axios');
 
 var games = [];
 
-axios.get("https://api.twitch.tv/helix/games/top", {
+router.get('/:cursor?', function(req, res, next) {
+    var cursor = req.params.cursor;
+    var request_url = "https://api.twitch.tv/helix/games/top";
+    
+    if (cursor) {
+        request_url += "?after=" + cursor;
+        console.log(request_url);
+    }
+
+    axios.get(request_url, {
         headers: API.headers()
     })
     .then((response) => {
         games = response.data;
+        res.send(games);
     })
     .catch((error) => {
         console.log(error);
-    })
+    });
 
-router.get('/', function(req, res, next) {
-    res.send(games);
+    
 });
 
 module.exports = router;

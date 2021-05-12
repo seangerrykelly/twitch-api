@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink as NLink} from 'react-router-dom';
+import {Button} from 'react-bootstrap';
 import { FaBars } from 'react-icons/fa';
 
 export const Nav = styled.nav`
@@ -96,7 +97,7 @@ export const NavBtnLink = styled(NLink)`
     }
 `
 
-export const GitBtnLink = styled(NLink)`
+export const GitBtnLink = styled(Button)`
     border-radius: 4px;
     background: #256ce1;
     padding: 5px 11px;

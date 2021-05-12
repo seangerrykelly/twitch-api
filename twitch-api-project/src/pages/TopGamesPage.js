@@ -9,7 +9,7 @@ export default class TopGamesPage extends React.Component {
         super(props);
         this.state = {
             games: "",
-            backend_response: ""
+            pagination: ""
         };
     }
 
@@ -17,15 +17,40 @@ export default class TopGamesPage extends React.Component {
         this.callTopGamesAPI();
     }
 
-    callTopGamesAPI = async() => {
+    callTopGamesAPI = async(cursor) => {
+
+        var url = "http://localhost:9000/topGames";
+        if(cursor) {
+            url += "/" + cursor;
+        }
+
         try {
-            const response = await fetch("http://localhost:9000/topGames")
-                .then(res => res.json())
-                .then(res => this.setState({games: res.data}));
-                this.cleanGameDataForDisplay();
+            
+            if (!cursor) {
+                const response = await fetch(url)
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        games: res.data,
+                        pagination: res.pagination
+                    }));
+            } else {
+                const response = await fetch(url)
+                    .then(res => res.json())
+                    .then(res => this.setState({
+                        games: this.state.games.concat(res.data),
+                        pagination: res.pagination
+                    }));
+            }
+
+            this.cleanGameDataForDisplay();
         } catch (err) {
             console.log(err);
         }
+    }
+
+    loadMoreGames() {
+        this.callTopGamesAPI(this.state.pagination.cursor);
+        this.forceUpdate();
     }
 
     cleanGameDataForDisplay() {
@@ -58,13 +83,14 @@ export default class TopGamesPage extends React.Component {
         } 
         else {
             return (
-                <div style={{
-                    display: 'flex', 
-                    flexWrap: 'wrap',
-                    justifyContent:'center', 
-                    alignItems: 'center', 
-                    height: '90vh'
-                    }}
+                <div    className="row"
+                        style={{
+                        display: 'flex', 
+                        flexWrap: 'wrap',
+                        justifyContent:'center', 
+                        alignItems: 'center', 
+                        height: '90vh'
+                        }}
                 >
                     {
                         this.state.games.map((game, index) => 
@@ -80,6 +106,9 @@ export default class TopGamesPage extends React.Component {
                             </Card>
                         )
                     }
+                    <InfoLink variant="primary"
+                                onClick={this.loadMoreGames.bind(this)}
+                                >Load More</InfoLink>
                 </div>
             )
         }
