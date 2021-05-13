@@ -2,6 +2,7 @@ import React from 'react';
 import {Card} from 'react-bootstrap';
 import { InfoLink } from './ButtonVariants';
 import "./Box.css";
+import "./Card.css";
 
 export default class VideosTab extends React.Component {
 
@@ -9,6 +10,7 @@ export default class VideosTab extends React.Component {
         super(props);
         this.state = {
             user_id: this.props.user_id,
+            type: this.props.type,
             videos: "",
             pagination: ""
         };
@@ -20,7 +22,7 @@ export default class VideosTab extends React.Component {
 
     callVideosAPI = async(cursor) => {
 
-        var url = "http://localhost:9000/videos/user/" + this.state.user_id;
+        var url = "http://localhost:9000/videos/" + this.state.type + "/" + this.state.user_id;
         if (cursor) {
             url += "/" + cursor;
         }
@@ -99,7 +101,7 @@ export default class VideosTab extends React.Component {
                 >
                     {
                         this.state.videos.map((video, index) =>
-                            <Card key={index} style={{ width: '18rem' }} className="box">
+                            <Card key={index} style={{ width: '18rem' }} className="box video-card">
                                 <Card.Img alt="Video" variant="left" src={video.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{video.title}</Card.Title>

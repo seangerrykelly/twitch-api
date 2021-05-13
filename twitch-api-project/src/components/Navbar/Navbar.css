@@ -17,6 +17,7 @@
     background: #6441A4;
     padding: 0.5rem calc((100vw - 1000px) / 2);
     z-index: 10;
+    position: sticky;
 }
 
 .nav-home-link {
@@ -131,7 +132,8 @@
     .nav-links:hover {
         background-color: #fff;
         color: #6441A4;
-        border-radius: 0;
+        padding: 2rem;
+        width: 100%;
     }
 
     .github-nav-link-container {

@@ -2,6 +2,7 @@ import React from 'react';
 import {Card} from 'react-bootstrap';
 import { InfoLink } from './ButtonVariants';
 import "./Box.css";
+import "./Card.css";
 
 export default class TopGamesPage extends React.Component {
 
@@ -53,24 +54,30 @@ export default class TopGamesPage extends React.Component {
         this.forceUpdate();
     }
 
+    shortenText(text, charCount) {
+        text = 
+            text.length > charCount
+                ?   text.substring(0,charCount)
+                :   text;
+    
+        text = 
+            text.length === charCount
+                ?   text.substring(
+                        0,
+                        Math.min(
+                            text.length,
+                            text.lastIndexOf(" ")
+                        )
+                    ) + "..."
+                :   text;
+        return text;
+    }
+
     cleanGameDataForDisplay() {
+        var instance = this;
         this.state.games.forEach( function(game) {
             game.box_art_url = game.box_art_url.replace('{width}x{height}', '225x400');
-            game.name = 
-                game.name.length > 22
-                    ?   game.name.substring(0,22)
-                    :   game.name;
-            
-            game.name = 
-                game.name.length === 22
-                    ?   game.name.substring(
-                            0,
-                            Math.min(
-                                game.name.length,
-                                game.name.lastIndexOf(" ")
-                            )
-                        ) + "..."
-                    :   game.name;
+            game.name = instance.shortenText(game.name, 22);
         });
         this.forceUpdate();
     }
@@ -94,7 +101,7 @@ export default class TopGamesPage extends React.Component {
                 >
                     {
                         this.state.games.map((game, index) => 
-                            <Card key={index} style={{ width: '18rem' }} className="box">
+                            <Card key={index} style={{ width: '18rem' }} className="box video-card">
                                 <Card.Img variant="left" src={game.box_art_url} />
                                 <Card.Body>
                                     <Card.Title>{game.name}</Card.Title>

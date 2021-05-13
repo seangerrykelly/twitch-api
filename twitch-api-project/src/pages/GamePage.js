@@ -1,5 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Card, Tabs, Tab} from 'react-bootstrap';
+import VideosTab from './VideosTab';
+import ClipsTab from './ClipsTab';
+import LiveStreamsTab from './LiveStreamsTab';
+import "./Box.css";
 
 export default class GamePage extends React.Component {
 
@@ -37,16 +42,31 @@ export default class GamePage extends React.Component {
     render() {
         if (this.state.game.length === 0) {
             return (
-                <div>no</div>
+                <div>No Data Available</div>
             )
         } 
         else {
             return (
                 <div>
-                    <div>
-                        <img alt="Game" src={this.state.game.box_art_url}/>
-                        <p>{this.state.game.name}</p>
-                    </div>
+                    <Card style={{ width: '18rem' }} className="box">
+                        <Card.Img variant="left" src={this.state.game.box_art_url} />
+                        <Card.Body>
+                            <Card.Title>{this.state.game.name}</Card.Title>
+                            <Card.Text>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Tabs defaultActiveKey="streams">
+                        <Tab eventKey="streams" title="Live Streams">
+                            <LiveStreamsTab game_id={this.state.id}/>
+                        </Tab>
+                        <Tab eventKey="videos" title="Videos">
+                            <VideosTab type="game" user_id={this.state.id}/>
+                        </Tab>
+                        <Tab eventKey="clips" title="Clips">
+                            <ClipsTab type="game" user_id={this.state.id}/>
+                        </Tab>
+                    </Tabs>
                 </div>
             )
         }

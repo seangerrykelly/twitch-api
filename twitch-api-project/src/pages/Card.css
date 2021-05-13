@@ -1,0 +1,13 @@
+.video-card:hover {
+    transition: .2s ease-in-out;
+    transform: scale(1.03);
+    box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 0.12),
+                0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+                0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+}
+
+.row>* {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-top: 20px !important;
+}

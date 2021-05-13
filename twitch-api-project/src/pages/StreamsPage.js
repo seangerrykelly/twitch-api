@@ -2,6 +2,7 @@ import React from 'react';
 import {Card} from 'react-bootstrap';
 import { InfoLink } from './ButtonVariants';
 import "./Box.css";
+import "./Card.css";
 
 export default class StreamsPage extends React.Component {
 
@@ -49,24 +50,30 @@ export default class StreamsPage extends React.Component {
         this.callStreamsAPI(this.state.pagination.cursor);
     }
 
+    shortenText(text, charCount) {
+        text = 
+            text.length > charCount
+                ?   text.substring(0,charCount)
+                :   text;
+    
+        text = 
+            text.length === charCount
+                ?   text.substring(
+                        0,
+                        Math.min(
+                            text.length,
+                            text.lastIndexOf(" ")
+                        )
+                    ) + "..."
+                :   text;
+        return text;
+    }
+
     cleanStreamDataForDisplay() {
+        var instance = this;
         this.state.streams.forEach( function(stream) {
             stream.thumbnail_url = stream.thumbnail_url.replace('{width}x{height}', '400x225');
-            stream.title = 
-                stream.title.length > 39
-                    ?   stream.title.substring(0,39)
-                    :   stream.title;
-            
-            stream.title = 
-                stream.title.length === 39
-                    ?   stream.title.substring(
-                            0,
-                            Math.min(
-                                stream.title.length,
-                                stream.title.lastIndexOf(" ")
-                            )
-                        ) + "..."
-                    :   stream.title;
+            stream.title = instance.shortenText(stream.title, 19)
         });
     }
 
@@ -90,7 +97,7 @@ export default class StreamsPage extends React.Component {
                     >
                         {
                             this.state.streams.map((stream, index) =>
-                                <Card key={index} style={{ width: '18rem' }} className="box">
+                                <Card key={index} style={{ width: '18rem' }} className="video-card box">
                                     <Card.Img variant="left" src={stream.thumbnail_url} />
                                     <Card.Body>
                                         <Card.Title>{stream.title}</Card.Title>

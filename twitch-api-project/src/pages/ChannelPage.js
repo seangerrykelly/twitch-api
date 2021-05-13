@@ -57,10 +57,10 @@ export default class ChannelPage extends React.Component {
                     </Card>
                     <Tabs defaultActiveKey="videos">
                         <Tab eventKey="videos" title="Videos">
-                            <VideosTab user_id={this.state.id}/>
+                            <VideosTab type="user" user_id={this.state.id}/>
                         </Tab>
                         <Tab eventKey="clips" title="Clips">
-                            <ClipsTab user_id={this.state.id}/>
+                            <ClipsTab type="user" user_id={this.state.id}/>
                         </Tab>
                     </Tabs>
                 </div>

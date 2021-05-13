@@ -11,7 +11,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var topGamesRouter = require('./routes/topGames');
 var gamesRouter = require('./routes/getGame');
-var streamsRouter = require('./routes/streams');
+var streamsRouter = require('./routes/getStreams');
+var streamsByGameRouter = require('./routes/getStreamsByGame');
 var videosRouter = require('./routes/getVideos');
 var clipsRouter = require('./routes/getClips');
 var channelsRouter = require('./routes/getChannel');
@@ -34,26 +35,10 @@ app.use('/users', usersRouter);
 app.use('/topGames', topGamesRouter);
 app.use('/games', gamesRouter);
 app.use('/streams', streamsRouter);
+app.use('/gameStreams', streamsByGameRouter);
 app.use('/videos', videosRouter);
 app.use('/clips', clipsRouter);
 app.use('/channels', channelsRouter);
-
-//Get data on game with specified ID
-// app.get('/getGames/:id', (request, response) => {
-//   let id = request.params.id
-
-//   axios.get("https://api.twitch.tv/helix/games?id=" + id, {
-//         headers: API.headers()
-//     })
-//     .then((res) => {
-//         //response.json(res.data);
-//         console.log(res.data.data);
-//         response.send(res.data.data);
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     })
-// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
