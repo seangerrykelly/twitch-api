@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap';
-import { InfoLink } from './ButtonVariants';
+import { InfoLink, WatchButton } from './ButtonVariants';
 import "./Box.css";
 import "./Card.css";
 
@@ -108,6 +108,10 @@ export default class ClipsTab extends React.Component {
                                     <Card.Text>
                                         {clip.broadcaster_name}
                                     </Card.Text>
+                                    <WatchButton href={`/watch/clip/${clip.id}`}> 
+                                        <i className="fas fa-play"/>
+                                        Watch
+                                    </WatchButton>
                                     <Card.Text>
                                         {clip.view_count} Views
                                     </Card.Text>

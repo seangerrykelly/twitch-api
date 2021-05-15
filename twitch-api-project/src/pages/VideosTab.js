@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap';
-import { InfoLink } from './ButtonVariants';
+import { InfoLink, WatchButton } from './ButtonVariants';
 import "./Box.css";
 import "./Card.css";
 
@@ -105,9 +105,10 @@ export default class VideosTab extends React.Component {
                                 <Card.Img alt="Video" variant="left" src={video.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{video.title}</Card.Title>
-                                    <Card.Text>
-                                        {video.description}
-                                    </Card.Text>
+                                    <WatchButton href={`/watch/video/${video.id}`}>
+                                        <i className="fas fa-play"/>
+                                        Watch
+                                    </WatchButton>
                                     <Card.Text>
                                         {video.view_count} Views
                                     </Card.Text>

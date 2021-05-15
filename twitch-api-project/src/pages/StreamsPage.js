@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap';
-import { InfoLink } from './ButtonVariants';
+import { InfoLink, ChannelButton } from './ButtonVariants';
 import "./Box.css";
 import "./Card.css";
 
@@ -102,14 +102,14 @@ export default class StreamsPage extends React.Component {
                                     <Card.Body>
                                         <Card.Title>{stream.title}</Card.Title>
                                         <Card.Text>
-                                            User: {stream.user_name}
+                                            <ChannelButton  href={`/channels/${stream.user_id}`}>
+                                                <i className="fas fa-user"/>
+                                                {stream.user_name}
+                                            </ChannelButton>
                                         </Card.Text>
                                         <Card.Text>
                                             Viewers: {stream.viewer_count}
                                         </Card.Text>
-                                        <InfoLink href={`/channels/${stream.user_id}`} >
-                                            See More
-                                        </InfoLink>
                                     </Card.Body>
                                 </Card>
                             )

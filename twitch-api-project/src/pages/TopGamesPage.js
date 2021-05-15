@@ -108,7 +108,10 @@ export default class TopGamesPage extends React.Component {
                                     <Card.Text>
                                         
                                     </Card.Text>
-                                    <InfoLink href={`/games/${game.id}`}>See More</InfoLink>
+                                    <InfoLink href={`/games/${game.id}`}>
+                                        <i className="fas fa-gamepad"/>
+                                        Browse    
+                                    </InfoLink>
                                 </Card.Body>
                             </Card>
                         )

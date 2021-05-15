@@ -4,6 +4,7 @@ import TopGamesPage from './pages/TopGamesPage.js';
 import GamePage from './pages/GamePage.js';
 import ChannelPage from './pages/ChannelPage.js';
 import StreamsPage from './pages/StreamsPage';
+import WatchPage from './pages/WatchPage';
 import Navbar from './components/Navbar';
 import './App.css';
 
@@ -24,6 +25,9 @@ function App() {
         </Switch>
         <Switch>
           <Route exact path="/streams" component={StreamsPage}/>
+        </Switch>
+        <Switch>
+          <Route exact path="/watch/:type/:id" component={WatchPage}/>
         </Switch>
       </BrowserRouter>
     </div>

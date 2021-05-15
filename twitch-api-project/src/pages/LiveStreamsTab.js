@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap';
-import { InfoLink } from './ButtonVariants';
+import { InfoLink, ChannelButton } from './ButtonVariants';
 import "./Box.css";
 import "./Card.css";
 
@@ -106,9 +106,10 @@ export default class LiveStreamsTab extends React.Component {
                                 <Card.Img alt="Stream" variant="left" src={stream.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{stream.title}</Card.Title>
-                                    <Card.Text>
-                                        {stream.description}
-                                    </Card.Text>
+                                    <ChannelButton  href={`/channels/${stream.user_id}`}>
+                                            <i className="fas fa-user"/>
+                                            {stream.user_name}
+                                    </ChannelButton>
                                     <Card.Text>
                                         {stream.viewer_count} Viewers
                                     </Card.Text>
