@@ -9,8 +9,6 @@ export default class WatchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            video: "",
-            pagination: "",
             video_url: "",
         };
     }
@@ -41,7 +39,8 @@ export default class WatchPage extends React.Component {
                 <iframe
                     src={this.state.video_url}
                     height="300"
-                    width="400">
+                    width="400"
+                    allowFullScreen="true">
                 </iframe>
             </div>
         )

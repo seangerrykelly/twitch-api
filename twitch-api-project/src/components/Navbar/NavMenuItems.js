@@ -1,11 +1,11 @@
 export const NavMenuItems = [
     {
-        title: "Games",
+        title: "Categories",
         url: "/games",
         cName: 'nav-links',
     },
     {
-        title: "Streams",
+        title: "Live Channels",
         url: "/streams",
         cName: 'nav-links',
     }

@@ -67,7 +67,8 @@ export default class ChannelPage extends React.Component {
                         <iframe
                             src={this.state.stream_url}
                             height="300"
-                            width="400">
+                            width="400"
+                            allowFullScreen="true">
                         </iframe>
                     </div>
                     <Tabs defaultActiveKey="videos">
