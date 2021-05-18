@@ -58,17 +58,12 @@ export default class HomePage extends React.Component {
                             allowFullScreen="true">
                         </iframe>
                     </div>
-                    <div    style={{
-                                display: 'flex',
-                                justifyContent:'center', 
-                                flexWrap: 'wrap'
-                    }}>
+                    <div>
                         <h1 style={{color:'#6441A4'}}>Welcome!</h1>
                         <p>I made this application using the Twitch API. The frontend was built using the React.js library, 
                             while the backend was developed using the Express framework for Node.js. Please consider taking a look
-                            at the GitHub below.
+                            at the <a href="https://github.com/seangerrykelly/twitch-api">GitHub.</a>
                         </p>
-                        <GitButton className="github-nav-link" href="https://github.com/seangerrykelly/twitch-api">GitHub</GitButton>
 
                     </div>
                 </div>

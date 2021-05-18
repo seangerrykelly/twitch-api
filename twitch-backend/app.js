@@ -9,6 +9,7 @@ const API = require('./lib/API');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var accessTokenRouter = require('./routes/accessToken');
 var topGamesRouter = require('./routes/topGames');
 var gamesRouter = require('./routes/getGame');
 var streamsRouter = require('./routes/getStreams');
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/token', accessTokenRouter);
 app.use('/users', usersRouter);
 app.use('/topGames', topGamesRouter);
 app.use('/games', gamesRouter);
