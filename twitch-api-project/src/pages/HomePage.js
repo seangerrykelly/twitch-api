@@ -1,5 +1,4 @@
 import React from 'react';
-import { GitButton } from './ButtonVariants';
 import "./Box.css";
 import "./Card.css";
 
@@ -52,6 +51,7 @@ export default class HomePage extends React.Component {
                                 alignItems: 'center'
                     }}>
                         <iframe
+                            title="Top Stream"
                             src={this.state.stream_url}
                             height="600"
                             width="800"

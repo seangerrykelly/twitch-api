@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
 import {NavMenuItems} from './NavMenuItems';
 import { NavLink } from 'react-router-dom';
 import SearchField from 'react-search-field';

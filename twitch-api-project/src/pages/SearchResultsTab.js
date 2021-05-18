@@ -155,6 +155,10 @@ export default class SearchResultsTab extends React.Component {
                                         >Load More</InfoLink>
                         </div>
                     )
+                default:
+                    return(
+                        <div></div>
+                    )
         }
     }
 

@@ -1,6 +1,4 @@
 import React from 'react';
-import {Card} from 'react-bootstrap';
-import { InfoLink, ChannelButton, WatchButton } from './ButtonVariants';
 import "./Box.css";
 import "./Card.css";
 
@@ -20,13 +18,18 @@ export default class WatchPage extends React.Component {
     buildVideoUrl() {
         const { match } = this.props;
         const { params: {id, type} } = match;
+        var url;
 
         switch (type) {
             case "video":
-                this.state.video_url = "https://player.twitch.tv?" + type + "=" + id + "&parent=localhost";
+                url = "https://player.twitch.tv?" + type + "=" + id + "&parent=localhost";
+                this.setState({ video_url: url});
                 break;
             case "clip":
-                this.state.video_url = "https://clips.twitch.tv/embed?" + type + "=" + id + "&parent=localhost";
+                url = "https://clips.twitch.tv/embed?" + type + "=" + id + "&parent=localhost";
+                this.setState({ video_url: url});
+                break;
+            default:
                 break;
         }
         this.forceUpdate();
@@ -41,6 +44,7 @@ export default class WatchPage extends React.Component {
                     alignItems: 'center'
                     }}>
                 <iframe
+                    title="Video"
                     src={this.state.video_url}
                     height="600"
                     width="800"

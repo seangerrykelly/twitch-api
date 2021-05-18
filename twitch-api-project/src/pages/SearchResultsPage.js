@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card, Tabs, Tab} from 'react-bootstrap';
+import {Tabs, Tab} from 'react-bootstrap';
 import "./Box.css";
 import SearchResultsTab from './SearchResultsTab';
 
