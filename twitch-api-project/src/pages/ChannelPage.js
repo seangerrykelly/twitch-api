@@ -67,8 +67,8 @@ export default class ChannelPage extends React.Component {
                         </Card>
                         <iframe
                             src={this.state.stream_url}
-                            height="300"
-                            width="400"
+                            height="400"
+                            width="534"
                             allowFullScreen="true">
                         </iframe>
                     </div>
