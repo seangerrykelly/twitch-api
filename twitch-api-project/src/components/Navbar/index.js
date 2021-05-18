@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 import {NavMenuItems} from './NavMenuItems';
 import { NavLink } from 'react-router-dom';
+import SearchField from 'react-search-field';
 import './Navbar.css';
 
 class Navbar extends React.Component {
@@ -10,6 +11,18 @@ class Navbar extends React.Component {
     
     handleClick = () => {
         this.setState({ clicked: !this.state.clicked })
+    }
+
+    onSearchEnter(value, event) {
+        window.location.href = "/search/" + value;
+    }
+
+    onSearchClick(value) {
+        window.location.href = "/search/" + value;
+    }
+
+    onSearchChanged(value, event) {
+
     }
 
     render() {
@@ -33,9 +46,15 @@ class Navbar extends React.Component {
                             )
                         })}
                     </ul>
-                    <nav className="github-nav-link-container">
+                    <SearchField
+                        placeholder="Search"
+                        onChange={this.onSearchChanged}
+                        onEnter={this.onSearchEnter}
+                        onSearchClick={this.onSearchClick}
+                    />
+                    {/* <nav className="github-nav-link-container">
                         <Button className="github-nav-link" href="https://github.com/seangerrykelly/twitch-api">GitHub</Button>
-                    </nav>
+                    </nav> */}
                 </nav>
             </>
         )

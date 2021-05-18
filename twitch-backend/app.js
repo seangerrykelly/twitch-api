@@ -16,6 +16,7 @@ var streamsByGameRouter = require('./routes/getStreamsByGame');
 var videosRouter = require('./routes/getVideos');
 var clipsRouter = require('./routes/getClips');
 var channelsRouter = require('./routes/getChannel');
+var searchRouter = require('./routes/search');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use('/gameStreams', streamsByGameRouter);
 app.use('/videos', videosRouter);
 app.use('/clips', clipsRouter);
 app.use('/channels', channelsRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

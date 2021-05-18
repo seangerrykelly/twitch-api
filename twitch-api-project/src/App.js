@@ -5,6 +5,7 @@ import GamePage from './pages/GamePage.js';
 import ChannelPage from './pages/ChannelPage.js';
 import StreamsPage from './pages/StreamsPage';
 import WatchPage from './pages/WatchPage';
+import SearchResultsPage from './pages/SearchResultsPage';
 import Navbar from './components/Navbar';
 import './App.css';
 
@@ -28,6 +29,9 @@ function App() {
         </Switch>
         <Switch>
           <Route exact path="/watch/:type/:id" component={WatchPage}/>
+        </Switch>
+        <Switch>
+          <Route exact path="/search/:id" component={SearchResultsPage}/>
         </Switch>
       </BrowserRouter>
     </div>
