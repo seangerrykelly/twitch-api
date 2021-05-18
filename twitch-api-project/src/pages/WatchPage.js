@@ -36,7 +36,6 @@ export default class WatchPage extends React.Component {
     }
 
     render() {
-        console.log(this.state.video_url);
         return(
             <div    style={{
                     display: 'flex',

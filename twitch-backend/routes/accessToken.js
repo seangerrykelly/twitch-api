@@ -15,9 +15,6 @@ router.get('/', function(req, res, next) {
                                                                         + "&grant_type=" + grant_type
                                                                         + "&scope=analytics:read:games";
 
-    console.log(request_url);
-
-
     axios.post(request_url)
         .then((response) => {
             token = response.data.access_token;
