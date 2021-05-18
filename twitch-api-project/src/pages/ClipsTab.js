@@ -101,7 +101,7 @@ export default class ClipsTab extends React.Component {
                 >
                     {
                         this.state.clips.map((clip, index) =>
-                            <Card key={index} style={{ width: '18rem' }} className="box video-card">
+                            <Card key={index} style={{ width: '18rem', height: '23rem' }} className="box video-card">
                                 <Card.Img variant="left" src={clip.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{clip.title}</Card.Title>

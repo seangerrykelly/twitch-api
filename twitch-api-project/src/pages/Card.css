@@ -11,3 +11,14 @@
     padding-left: 0px !important;
     margin-top: 20px !important;
 }
+
+.search-result-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.display-card {
+    width: 18rem;
+    height: 25rem;
+}

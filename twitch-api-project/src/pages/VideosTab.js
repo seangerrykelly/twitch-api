@@ -101,7 +101,7 @@ export default class VideosTab extends React.Component {
                 >
                     {
                         this.state.videos.map((video, index) =>
-                            <Card key={index} style={{ width: '18rem' }} className="box video-card">
+                            <Card key={index} style={{ width: '18rem', height: '20rem' }} className="box video-card">
                                 <Card.Img alt="Video" variant="left" src={video.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{video.title}</Card.Title>

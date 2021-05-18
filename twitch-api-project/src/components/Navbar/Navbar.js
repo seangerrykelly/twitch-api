@@ -47,6 +47,7 @@ class Navbar extends React.Component {
                         })}
                     </ul>
                     <SearchField
+                        classNames="search-field"
                         placeholder="Search"
                         onChange={this.onSearchChanged}
                         onEnter={this.onSearchEnter}

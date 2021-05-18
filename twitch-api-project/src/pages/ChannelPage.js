@@ -4,6 +4,7 @@ import {Card, Tabs, Tab} from 'react-bootstrap';
 import VideosTab from './VideosTab';
 import ClipsTab from './ClipsTab';
 import "./Box.css";
+import "./Card.css"
 
 export default class ChannelPage extends React.Component {
 
@@ -55,7 +56,7 @@ export default class ChannelPage extends React.Component {
                             justifyContent:'space-around', 
                             alignItems: 'center'
                             }}>
-                        <Card style={{ width: '18rem' }} className="box">
+                        <Card className="box display-card">
                             <Card.Img variant="left" src={this.state.channel.profile_image_url} />
                             <Card.Body>
                                 <Card.Title>{this.state.channel.display_name}</Card.Title>

@@ -32,7 +32,9 @@ export default class SearchResultsPage extends React.Component {
             )
         }
         return (
+
             <div>
+                <h2>Search results for "{this.state.id}"</h2>
                 <Tabs defaultActiveKey="categories">
                     <Tab eventKey="categories" title="Categories">
                         <SearchResultsTab type="categories" id={this.state.id}/>

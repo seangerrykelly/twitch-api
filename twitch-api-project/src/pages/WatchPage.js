@@ -35,11 +35,15 @@ export default class WatchPage extends React.Component {
     render() {
         console.log(this.state.video_url);
         return(
-            <div>
+            <div    style={{
+                    display: 'flex',
+                    justifyContent:'space-around', 
+                    alignItems: 'center'
+                    }}>
                 <iframe
                     src={this.state.video_url}
-                    height="300"
-                    width="400"
+                    height="600"
+                    width="800"
                     allowFullScreen="true">
                 </iframe>
             </div>

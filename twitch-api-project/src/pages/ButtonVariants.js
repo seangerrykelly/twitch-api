@@ -54,3 +54,15 @@ export const WatchButton = styled(Button)`
         color: #2D3436;
     }
 `
+
+export const GitButton = styled(Button)`
+    border-radius: 4px;
+    background: #6441A4 !important;
+    padding: 5px 11px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+`

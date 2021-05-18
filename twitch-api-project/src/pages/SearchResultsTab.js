@@ -11,7 +11,7 @@ export default class SearchResultsTab extends React.Component {
         this.state = {
             id: this.props.id,
             type: this.props.type,
-            results: ""
+            results: []
         };
     }
 
@@ -86,7 +86,7 @@ export default class SearchResultsTab extends React.Component {
     }
 
     render() {
-        if (this.state.results.length === 0) {
+        if (!this.state.results || this.state.results.length === 0) {
             return(
                 <div>No results were found</div>
             )
@@ -106,14 +106,16 @@ export default class SearchResultsTab extends React.Component {
                     >
                         {
                             this.state.results.map((result, index) =>
-                                <Card key={index} style={{ width: '18rem' }} className="box video-card">
+                                <Card key={index} style={{ width: '18rem', height: '25rem' }} className="box video-card h-60">
                                     <Card.Img alt="Video" variant="left" src={result.thumbnail_url} />
                                     <Card.Body>
                                         <Card.Title>{result.title}</Card.Title>
+                                        <Card.Text>
                                         <ChannelButton  href={`/channels/${result.id}`}>
                                             <i className="fas fa-user"/>
                                             {result.display_name}
                                         </ChannelButton>
+                                        </Card.Text>
                                     </Card.Body>
                                 </Card>
                             )

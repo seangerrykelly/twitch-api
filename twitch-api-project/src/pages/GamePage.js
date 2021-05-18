@@ -48,7 +48,7 @@ export default class GamePage extends React.Component {
         else {
             return (
                 <div>
-                    <Card style={{ width: '18rem' }} className="box">
+                    <Card style={{ width: '18rem'}} className="box">
                         <Card.Img variant="left" src={this.state.game.box_art_url} />
                         <Card.Body>
                             <Card.Title>{this.state.game.name}</Card.Title>

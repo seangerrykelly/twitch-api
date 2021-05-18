@@ -102,7 +102,7 @@ export default class LiveStreamsTab extends React.Component {
                 >
                     {
                         this.state.streams.map((stream, index) =>
-                            <Card key={index} style={{ width: '18rem' }} className="box video-card">
+                            <Card key={index} style={{ width: '18rem', height: '20rem' }} className="box video-card">
                                 <Card.Img alt="Stream" variant="left" src={stream.thumbnail_url} />
                                 <Card.Body>
                                     <Card.Title>{stream.title}</Card.Title>
